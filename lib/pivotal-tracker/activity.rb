@@ -20,11 +20,10 @@ module PivotalTracker
           options_string << "limit=#{options.delete(:limit)}" if options[:limit]
           options_string << "newer_than_version=#{options.delete(:newer_than_version)}" if options[:newer_than_version]
 
-          if options[:occurred_since]
-            options_string << "occurred_since_date=\"#{options[:occurred_since].utc}\""
-          elsif options[:occurred_since_date]
-            #NOTE currently forces UTC as the timezone
-            options_string << "occurred_since_date=#{URI.escape options[:occurred_since_date].strftime("%Y/%m/%d %H:%M:%S UTC")}"
+          if options[:occurred_since_date]
+            puts options[:occured_since_date]
+            options_string << "occurred_since_date=#{URI.escape options[:occurred_since_date].utc.strftime("%Y/%m/%d %H:%M:%S UTC")}"
+            puts options_string
           end
 
           return "?#{options_string.join('&')}"
